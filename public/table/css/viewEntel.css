@@ -1,0 +1,46 @@
+
+.topLine{
+  background-color: #4F94F8;
+  color: aliceblue;
+  }
+  .col-4{
+  background-color: green;
+  }
+
+
+
+#resp-table {
+    width: 100%;
+    display: table;
+}
+#resp-table-body{
+    display: table-row-group;
+}
+.resp-table-row{
+    display: table-row;
+}
+.table-body-cell{
+    display: table-cell;
+    border: 1px solid #dddddd;
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+}
+
+.table-body-cell2{
+  display: table-cell;
+  background: linear-gradient(100deg, #4F94F8, rgb(27, 106, 255));
+  border: 1px solid #dddddd;
+  padding: 8px;
+  line-height: 1.42857143;
+  vertical-align: top;
+}
+
+.table-body-cell3{
+display: table-cell;
+background: linear-gradient(100deg, #4284ff, rgb(141, 35, 240));
+border: 1px solid #dddddd;
+padding: 8px;
+line-height: 1.42857143;
+vertical-align: top;
+}
