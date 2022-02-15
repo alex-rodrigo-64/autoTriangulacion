@@ -29,7 +29,7 @@ class TigoController extends Controller
     public function create()
     {
         //return view('tigo.create');
-        return view('errors.mantenimiento');
+        return view('tigo.create');
     }
 
     /**
