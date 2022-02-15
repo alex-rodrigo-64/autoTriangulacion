@@ -1137,7 +1137,7 @@ class EntelController extends Controller
                 
                 $sLat = $a;
                 $sLong = $b;
-                $image = file_get_contents('http://maps.googleapis.com/maps/api/staticmap?key=AIzaSyD3T_I3XRvnKbXL4ppS9boJpphoyh0igiw&center='
+                $image = file_get_contents('http://maps.googleapis.com/maps/api/staticmap?key=AIzaSyCG0Mwpu_yN933__wTpo1-PusUGLlKokow&center='
                 . $sLat. ",". $sLong
                 . '&maptype=hybrid'
                 .'&zoom=14&size=600x400'
@@ -1391,7 +1391,7 @@ class EntelController extends Controller
                 
                 $sLat = $a;
                 $sLong = $b;
-                $image = file_get_contents('http://maps.googleapis.com/maps/api/staticmap?key=AIzaSyD3T_I3XRvnKbXL4ppS9boJpphoyh0igiw&center='
+                $image = file_get_contents('http://maps.googleapis.com/maps/api/staticmap?key=AIzaSyCG0Mwpu_yN933__wTpo1-PusUGLlKokow&center='
                 . $sLat. ",". $sLong
                 . '&maptype=hybrid'
                 .'&zoom=14&size=600x400'

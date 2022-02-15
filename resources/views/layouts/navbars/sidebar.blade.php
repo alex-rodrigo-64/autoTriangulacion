@@ -5,6 +5,7 @@
             <a href="#" class="simple-text logo-normal">{{ __('Black Dashboard') }}</a>
         </div>
         <ul class="nav">
+            @if (Auth::user()->administracion == '2')
             <li @if ($pageSlug == 'dashboard') class="active " @endif>
                 <a href="{{ route('home') }}">
                     <i class="tim-icons icon-chart-pie-36"></i>
@@ -17,7 +18,9 @@
                     <p>{{ __('carrier') }}</p>
                 </a>
             </li>
-            <li>
+            @endif
+            @if(Auth::user()->administracion == '1')
+               <li>
                 <a data-toggle="collapse" href="#laravel-examples" aria-expanded="true">
                     <i class="fab fa-laravel" ></i>
                     <span class="nav-link-text" >{{ __('Laravel Examples') }}</span>
@@ -40,13 +43,17 @@
                         </li>
                     </ul>
                 </div>
-            </li>
-            <li @if ($pageSlug == 'icons') class="active " @endif>
+            </li> 
+            @endif
+            @if (Auth::user()->administracion == '2')
+             <li @if ($pageSlug == 'icons') class="active " @endif>
                 <a href="{{ url('example/entel') }}">
                     <i class="tim-icons icon-atom"></i>
                     <p>{{ __('Ejemplo PDF to Excel') }}</p>
                 </a>
-            </li>
+            </li>   
+            @endif
+            
         </ul>
     </div>
 </div>
