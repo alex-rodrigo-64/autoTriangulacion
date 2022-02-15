@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Http\Requests\UserRequest;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -40,6 +41,12 @@ class UserController extends Controller
     {
         $model->create($request->merge(['password' => Hash::make($request->get('password'))])->all());
 
+        User::where('email', $request->get('email'))
+       ->update([
+           'administracion' => '2',
+           'logeado' => 'no',
+        ]);
+        
         return redirect()->route('user.index')->withStatus(__('User successfully created.'));
     }
 

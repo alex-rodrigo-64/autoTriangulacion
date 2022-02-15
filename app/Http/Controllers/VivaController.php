@@ -27,7 +27,8 @@ class VivaController extends Controller
      */
     public function create()
     {
-        return view('viva.create');
+        //return view('viva.create');
+        return view('errors.mantenimiento');
     }
 
     /**

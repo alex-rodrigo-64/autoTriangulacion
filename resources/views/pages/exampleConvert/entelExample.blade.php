@@ -1,6 +1,8 @@
 @extends('layouts.app', ['page' => __('Icons'), 'pageSlug' => 'icons'])
 
 @section('content')
+
+    
 <div class="row">
     <div class="col-md-12">
         <div class="card">
@@ -18,6 +20,8 @@
                             <source src="{{ asset('videos/examples/Frontend.mp4') }}" />
                         </video>
                     </section>
+                    
+
                 </div>
             </div>
             <div class="card-body">
