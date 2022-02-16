@@ -80,6 +80,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('tigo/informe/registro', ['as' => 'tigo.informeRegistro', 'uses' => 'TigoController@informeRegistro']);
 	Route::get('tigo/informe/registro/{registro}', ['as' => 'tigo.informeCoincidencia', 'uses' => 'TigoController@informeCoincidencia']);
 	Route::get('tigo/informe/registro/{registro}/{filtrado}', ['as' => 'tigo.informefiltrado', 'uses' => 'TigoController@informefiltrado']);
+	Route::get('tigo/informe/registro/{registro}/{filtrado}/{fecha}', ['as' => 'tigo.informeFecha', 'uses' => 'TigoController@informeFecha']);
 });
 
 

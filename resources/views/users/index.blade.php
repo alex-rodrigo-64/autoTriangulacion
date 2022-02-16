@@ -7,10 +7,10 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-8">
-                            <h4 class="card-title">{{ __('Users') }}</h4>
+                            <h4 class="card-title">{{ __('Usuarios') }}</h4>
                         </div>
                         <div class="col-4 text-right">
-                            <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary">{{ __('Add user') }}</a>
+                            <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary">{{ __('Añadir Usuario') }}</a>
                         </div>
                     </div>
                 </div>
@@ -20,9 +20,9 @@
                     <div class="">
                         <table class="table tablesorter " id="">
                             <thead class=" text-primary">
-                                <th scope="col">{{ __('Name') }}</th>
-                                <th scope="col">{{ __('Email') }}</th>
-                                <th scope="col">{{ __('Creation Date') }}</th>
+                                <th scope="col">{{ __('Nombre de Usuario') }}</th>
+                                <th scope="col">{{ __('Correo Electrónico') }}</th>
+                                <th scope="col">{{ __('Fecha de Creación') }}</th>
                                 <th scope="col"></th>
                             </thead>
                             <tbody>
@@ -44,9 +44,9 @@
                                                                 @csrf
                                                                 @method('delete')
 
-                                                                <a class="dropdown-item" href="{{ route('user.edit', $user) }}">{{ __('Edit') }}</a>
-                                                                <button type="button" class="dropdown-item" onclick="confirm('{{ __("Are you sure you want to delete this user?") }}') ? this.parentElement.submit() : ''">
-                                                                            {{ __('Delete') }}
+                                                                <a class="dropdown-item" href="{{ route('user.edit', $user) }}">{{ __('Editar') }}</a>
+                                                                <button type="button" class="dropdown-item" onclick="confirm('{{ __("¿Estás seguro de que quieres eliminar este usuario?") }}') ? this.parentElement.submit() : ''">
+                                                                            {{ __('Eliminar') }}
                                                                 </button>
                                                             </form>
                                                         @else
