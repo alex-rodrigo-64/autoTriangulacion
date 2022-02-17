@@ -1,3 +1,4 @@
+   
 <div class="sidebar">
     <div class="sidebar-wrapper">
         <div class="logo">
@@ -23,7 +24,7 @@
                <li>
                 <a data-toggle="collapse" href="#laravel-examples" aria-expanded="true">
                     <i class="fab fa-laravel" ></i>
-                    <span class="nav-link-text" >{{ __('Laravel Examples') }}</span>
+                    <span class="nav-link-text" >{{ __('Administrador') }}</span>
                     <b class="caret mt-1"></b>
                 </a>
 
@@ -32,13 +33,13 @@
                         <li @if ($pageSlug == 'profile') class="active " @endif>
                             <a href="{{ route('profile.edit')  }}">
                                 <i class="tim-icons icon-single-02"></i>
-                                <p>{{ __('User Profile') }}</p>
+                                <p>{{ __('Perfil de Usuario') }}</p>
                             </a>
                         </li>
                         <li @if ($pageSlug == 'users') class="active " @endif>
                             <a href="{{ route('user.index')  }}">
                                 <i class="tim-icons icon-bullet-list-67"></i>
-                                <p>{{ __('User Management') }}</p>
+                                <p>{{ __('Administrar Usuarios') }}</p>
                             </a>
                         </li>
                     </ul>
