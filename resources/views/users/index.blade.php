@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => __('User Management'), 'pageSlug' => 'users'])
+@extends('layouts.app', ['page' => __('ADMINISTRADOR DE USUARIO'), 'pageSlug' => 'users'])
 
 @section('content')
     <div class="row">
@@ -20,9 +20,9 @@
                     <div class="">
                         <table class="table tablesorter " id="">
                             <thead class=" text-primary">
-                                <th scope="col">{{ __('Nombre de Usuario') }}</th>
-                                <th scope="col">{{ __('Correo Electrónico') }}</th>
-                                <th scope="col">{{ __('Fecha de Creación') }}</th>
+                                <th scope="col">{{ __('Nombre') }}</th>
+                                <th scope="col">{{ __('Correo') }}</th>
+                                <th scope="col">{{ __('Fecha de Creacion') }}</th>
                                 <th scope="col"></th>
                             </thead>
                             <tbody>
@@ -45,12 +45,12 @@
                                                                 @method('delete')
 
                                                                 <a class="dropdown-item" href="{{ route('user.edit', $user) }}">{{ __('Editar') }}</a>
-                                                                <button type="button" class="dropdown-item" onclick="confirm('{{ __("¿Estás seguro de que quieres eliminar este usuario?") }}') ? this.parentElement.submit() : ''">
+                                                                <button type="button" class="dropdown-item" onclick="confirm('{{ __("Are you sure you want to delete this user?") }}') ? this.parentElement.submit() : ''">
                                                                             {{ __('Eliminar') }}
                                                                 </button>
                                                             </form>
                                                         @else
-                                                            <a class="dropdown-item" href="{{ route('profile.edit') }}">{{ __('Edit') }}</a>
+                                                            <a class="dropdown-item" href="{{ route('profile.edit') }}">{{ __('Editar') }}</a>
                                                         @endif
                                                     </div>
                                                 </div>

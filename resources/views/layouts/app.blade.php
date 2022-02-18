@@ -21,9 +21,11 @@
         <link href="{{ asset('black') }}/css/theme.css" rel="stylesheet" />
 
         <!-- Links de jquery para tabla dinamica -->
-          
     </head>
+    
+
     <body class="{{ $class ?? '' }}">
+        
         @auth()
             <div class="wrapper">
                     @include('layouts.navbars.sidebar')
@@ -104,6 +106,7 @@
 
         <script src="{{ asset('black') }}/js/black-dashboard.min.js?v=1.0.0"></script>
         <script src="{{ asset('black') }}/js/theme.js"></script>
+        
 
         <!-- Script de Jquery para las tablas dinamicas-->
         
@@ -208,5 +211,6 @@
             });
         </script>
         @stack('js')
+
     </body>
 </html>

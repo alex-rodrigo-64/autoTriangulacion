@@ -1,16 +1,20 @@
 @extends('layouts.app', ['pageSlug' => 'dashboard'])
 
 @section('content')
-<style>
-.padre {
-    display: flex;
-    align-items: center;
-}
+        <style>
+        .padre {
+            display: flex;
+            align-items: center;
+        }
 
-.hijo {
-    line-height: 200px; //Damos 200px de alto para notar el efecto
-}
-</style>
+        .hijo {
+            line-height: 200px; //Damos 200px de alto para notar el efecto
+        }
+        </style>
+
+@if (Auth::user()->id !=  1)
+    
+
 <div class="form-row text-center">
     <div class="col-12">
     <div class="row">
@@ -44,7 +48,7 @@
     </div>
  </div>
 
-
+ @endif
 @endsection
 
 @push('js')

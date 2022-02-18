@@ -83,8 +83,8 @@
                             </p>
                         </div>
                     </p>
-                    <div class="card-description">
-                        {{ __('Do not be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...') }}
+                    <div class="card-description text-center">
+                        {{ __('VTDFIX') }}
                     </div>
                 </div>
                 <div class="card-footer">
