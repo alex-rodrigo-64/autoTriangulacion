@@ -45,6 +45,7 @@ class UserController extends Controller
        ->update([
            'administracion' => '2',
            'logeado' => 'no',
+           'permiso' => 'si',
         ]);
         
         return redirect()->route('user.index')->withStatus(__('User successfully created.'));
@@ -98,5 +99,13 @@ class UserController extends Controller
         $user->delete();
 
         return redirect()->route('user.index')->withStatus(__('User successfully deleted.'));
+    }
+
+    public function accion(){
+
+        User::where('id', $_POST["id"])
+       ->update([
+           'permiso' => $_POST["value"],
+        ]);
     }
 }
