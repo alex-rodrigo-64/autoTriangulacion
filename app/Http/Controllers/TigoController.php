@@ -515,21 +515,17 @@ class TigoController extends Controller
                     if ($Matriz[$i][$j] == 1) {
                       
                         if ($Matriz[0][$j] == $registro && $Matriz[$i][0] == $filtrado) {
-                            $consultaA = DB::table('excels')
+                            $consultaA = DB::table('tigo_excels')
                                     ->select('*')
-                                    ->where('identificador','=',$registro)
-                                    ->where('fecha', '>=' ,$fecha_inicial)
-                                    ->where('fecha', '<=' ,$fecha_fin)
-                                    ->where('tiempo', '<>' ,'-')
-                                    ->where('numeroA', '=' ,$filtrado)
+                                    ->where('identificador','=', $registro)
+                                    ->where('tiempo', '<>','')
+                                    ->where('numeroA', '=', $filtrado)
+
                                     ->get();
 
-                            $consultaB = DB::table('excels')
+                            $consultaB = DB::table('tigo_excels')
                                     ->select('*')
                                     ->where('identificador','=',$registro)
-                                    ->where('fecha', '>=' ,$fecha_inicial)
-                                    ->where('fecha', '<=' ,$fecha_fin)
-                                    ->where('tiempo', '<>' ,'-')
                                     ->where('numeroB', '=' ,$filtrado)
                                     ->get();
                             
@@ -541,7 +537,7 @@ class TigoController extends Controller
                                 }
                             
 
-                            
+                            dd($aux1);
                             
                             array_push($lista, $temp);
                         }
@@ -603,6 +599,8 @@ class TigoController extends Controller
                     array_push($nuevo, $temp);
                 }
                
+
+               // dd($nuevo);
                 
                 
             }
