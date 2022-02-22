@@ -21,7 +21,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
-
+ 
 
 
 Route::group(['middleware' => 'auth'], function () {
@@ -38,6 +38,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
+	Route::post('user/accion', ['as' => 'user.accion', 'uses' => 'UserController@accion']);
 });
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('example/entel', ['as' => 'pages.exampleConvert.entelExample', 'uses' => 'PageController@example']);
