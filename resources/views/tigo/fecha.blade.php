@@ -50,13 +50,13 @@
                                       $nombreA = 'vacio';
                                 }
                                 
-                                $nombreB = DB::table('entels')
+                                $nombreB = DB::table('tigos')
                                             ->select('nombre')
                                             ->where('numero_usuario','=',$nuevo[$i][$j]->numeroB)
                                             ->exists();
                                           
                                 if ($nombreB == true){
-                                      $nombreB = DB::table('entels')
+                                      $nombreB = DB::table('tigos')
                                             ->select('nombre')
                                             ->where('numero_usuario','=',$nuevo[$i][$j]->numeroB)
                                             ->get();
@@ -73,7 +73,7 @@
                             ?>
                          
                             
-                        @if ($nuevo[$i][$j]->tiempo != "000")
+                        @if ($nuevo[$i][$j]->tiempo != "00:00:00")
                         <ul style= "list-style-type: square;"><li>
                             <h4 align = "justify">EN FECHA {{$a}} a horas {{$b}} el usuario del número {{$nuevo[$i][$j]->numeroA}} @if ($nombreA != 'vacio')registrado a nombre de {{$nombreA}}, @else con datos de usuario desconocido @endif 
                                 <b>toma</b> contacto por {{$nuevo[$i][$j]->tiempo}} minutos, @if ($nuevo[$i][$j]->radio_baseA != '-')
@@ -94,11 +94,11 @@
                     @endfor
                     <br>
                    @endfor
-                   
+                  
 
                       </div>
 
-                      <a href="/entel/informe/registro/{{$registro}}/{{$filtrado}}"  class="btn btn-sm btn-danger float-left" >Atras</a>
+                      <a href="/tigo/informe/registro/{{$registro}}/{{$filtrado}}"  class="btn btn-sm btn-danger float-left" >Atras</a>
                     </div>
                 
                   </div>

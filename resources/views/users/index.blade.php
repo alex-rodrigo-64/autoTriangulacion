@@ -23,6 +23,7 @@
                                 <th scope="col">{{ __('Nombre') }}</th>
                                 <th scope="col">{{ __('Correo') }}</th>
                                 <th scope="col">{{ __('Fecha de Creacion') }}</th>
+                                <th scope="col">{{ __('Accion')}}</th>
                                 <th scope="col"></th>
                             </thead>
                             <tbody>
@@ -33,6 +34,9 @@
                                             <a href="mailto:{{ $user->email }}">{{ $user->email }}</a>
                                         </td>
                                         <td>{{ $user->created_at->format('d/m/Y H:i') }}</td>
+                                        <td>
+                                            <input type="checkbox" checked data-toggle="toggle" data-size="lg">
+                                        </td>
                                         <td class="text-right">
                                                 <div class="dropdown">
                                                     <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

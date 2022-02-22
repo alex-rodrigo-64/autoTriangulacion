@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => __('ENTEL'), 'pageSlug' => 'icons'])
+@extends('layouts.app', ['page' => __('TIGO'), 'pageSlug' => 'icons'])
 @section('content')
 
   <style>

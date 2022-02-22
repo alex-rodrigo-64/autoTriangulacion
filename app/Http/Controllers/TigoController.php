@@ -466,22 +466,151 @@ class TigoController extends Controller
                         }
                 }
             }
-            
+
             $fecha = [];
 
             foreach ($lista as $fechas) {
-                array_push($fecha, substr($fechas, 0, -9));
+                array_push($fecha, substr($fechas, 0, -6));
             }
-    
             $fecha = array_unique($fecha);
     
             $nuevo = [];
             foreach ($fecha as $fecha) {
-                array_push($nuevo, $fecha);
+                array_push($nuevo, str_replace("/", "-", $fecha));
             }
             
+        
             return view('tigo.informe',compact('nuevo','registro','filtrado'));
 
     }
+
+   
+    public function fechaFiltrada($registro, $filtrado ,$fecha)
+    {
+       
+        $fecha_inicial = $fecha . ' 00:00:00';
+        $fecha_fin= $fecha . ' 23:59:59';
+
+            $vertical = DB::table('tigos')             //contar arreglo con count($vertical)
+                            ->select('numero_usuario')
+                            ->get();
+
+            $horizontal = DB::table('tigo_excels')           //contar arreglo con count($horizontal)
+                            ->select('identificador')
+                            ->groupBy('identificador')
+                            ->get();
+
+            $Matriz = new tigoExcel();
+            $Matriz = $Matriz->matriz();
+
+            $lista = [];
+            
+
+            for ($i=1; $i < count($vertical)+1 ; $i++) { 
+                
+                for ($j=1; $j < count($horizontal)+1 ; $j++) { 
+
+                    
+                    $temp = [];  
+                    if ($Matriz[$i][$j] == 1) {
+                      
+                        if ($Matriz[0][$j] == $registro && $Matriz[$i][0] == $filtrado) {
+                            $consultaA = DB::table('excels')
+                                    ->select('*')
+                                    ->where('identificador','=',$registro)
+                                    ->where('fecha', '>=' ,$fecha_inicial)
+                                    ->where('fecha', '<=' ,$fecha_fin)
+                                    ->where('tiempo', '<>' ,'-')
+                                    ->where('numeroA', '=' ,$filtrado)
+                                    ->get();
+
+                            $consultaB = DB::table('excels')
+                                    ->select('*')
+                                    ->where('identificador','=',$registro)
+                                    ->where('fecha', '>=' ,$fecha_inicial)
+                                    ->where('fecha', '<=' ,$fecha_fin)
+                                    ->where('tiempo', '<>' ,'-')
+                                    ->where('numeroB', '=' ,$filtrado)
+                                    ->get();
+                            
+                                foreach ($consultaB as $aux1) {
+                                    array_push($temp, $aux1);
+                                }
+                                foreach ($consultaA as $aux1) {
+                                    array_push($temp, $aux1);
+                                }
+                            
+
+                            
+                            
+                            array_push($lista, $temp);
+                        }
+                        
+                    }
+
+                }
+            }
+            
+            $nuevo = [];
+            $cant = 0;
+
+            for ($i=0; $i < count($lista); $i++) { 
+                $temp = [];
+                for ($j=0; $j <  count($lista[$i])-1; $j++) { 
+                    $a = $j+1;
+                    if (($lista[$i][$j]->tiempo == $lista[$i][$a]->tiempo || $lista[$i][$j]->fecha == $lista[$i][$a]->fecha) && $lista[$i][$j]->llamada == "ENTRANTE") {
+                        
+                        if ($lista[$i][$j]->radio_baseB == '-' ) {
+                            $lista[$i][$j]->radio_baseB = $lista[$i][$a]->radio_baseB;
+                            $lista[$i][$j]->coordenadaB = $lista[$i][$a]->coordenadaB;
+                        } else {
+                            $lista[$i][$j]->radio_baseA = $lista[$i][$a]->radio_baseA;
+                            $lista[$i][$j]->coordenadaA = $lista[$i][$a]->coordenadaA;
+                        }
+                        
+                        //unset($lista[$i][$a]); 
+                        array_push($temp, $lista[$i][$j]);
+                        
+                         $j = $j+1;
+                    } else {
+                        if (($lista[$i][$j]->tiempo == $lista[$i][$a]->tiempo || $lista[$i][$j]->fecha == $lista[$i][$a]->fecha) && $lista[$i][$j]->llamada == "SALIENTE") {
+                         
+                            if ($lista[$i][$j]->radio_baseB == '-') {
+                                $lista[$i][$j]->radio_baseB = $lista[$i][$a]->radio_baseB;
+                                $lista[$i][$j]->coordenadaB = $lista[$i][$a]->coordenadaB;
+                            } else {
+                                $lista[$i][$j]->radio_baseA = $lista[$i][$a]->radio_baseA;
+                                $lista[$i][$j]->coordenadaA = $lista[$i][$a]->coordenadaA;
+                            }
+                              
+                            //unset($lista[$i][$a]); 
+                            array_push($temp, $lista[$i][$j]);
+                            $j = $j+1;
+                             
+                        } else {
+                                array_push($temp, $lista[$i][$j]);
+                                
+                        }
+                        
+                    }
+                    
+                }
+                $cant = $cant+1;
+                
+                if (sizeof($lista[$i])== 1) {
+                    array_push($nuevo, $lista[$i]);
+                }else{
+                    array_push($nuevo, $temp);
+                }
+               
+                
+                
+            }
+            
+           
+
+        return view('tigo.fecha', compact('nuevo','cant','registro','filtrado'));
+    }
+
 
 }
