@@ -537,7 +537,7 @@ class TigoController extends Controller
                                 }
                             
 
-                            dd($aux1);
+                            //dd($aux1);
                             
                             array_push($lista, $temp);
                         }
@@ -554,14 +554,15 @@ class TigoController extends Controller
                 $temp = [];
                 for ($j=0; $j <  count($lista[$i])-1; $j++) { 
                     $a = $j+1;
-                    if (($lista[$i][$j]->tiempo == $lista[$i][$a]->tiempo || $lista[$i][$j]->fecha == $lista[$i][$a]->fecha) && $lista[$i][$j]->llamada == "ENTRANTE") {
+                    if (($lista[$i][$j]->tiempo == $lista[$i][$a]->tiempo || $lista[$i][$j]->fecha == $lista[$i][$a]->fecha) && $lista[$i][$j]->llamada == "E") {
                         
-                        if ($lista[$i][$j]->radio_baseB == '-' ) {
-                            $lista[$i][$j]->radio_baseB = $lista[$i][$a]->radio_baseB;
-                            $lista[$i][$j]->coordenadaB = $lista[$i][$a]->coordenadaB;
+                        if ($lista[$i][$j]->sitioA == ' ' ) {
+                            $lista[$i][$j]->sitioA = $lista[$i][$a]->sitioA;
+                            $lista[$i][$j]->latitud = $lista[$i][$a]->latitud;
+                            $lista[$i][$j]->longitud = $lista[$i][$j]->longitud;
                         } else {
-                            $lista[$i][$j]->radio_baseA = $lista[$i][$a]->radio_baseA;
-                            $lista[$i][$j]->coordenadaA = $lista[$i][$a]->coordenadaA;
+                            $lista[$i][$j]->latitud = $lista[$i][$a]->latitud;
+                            $lista[$i][$j]->longitud = $lista[$i][$j]->longitud;
                         }
                         
                         //unset($lista[$i][$a]); 
@@ -569,14 +570,15 @@ class TigoController extends Controller
                         
                          $j = $j+1;
                     } else {
-                        if (($lista[$i][$j]->tiempo == $lista[$i][$a]->tiempo || $lista[$i][$j]->fecha == $lista[$i][$a]->fecha) && $lista[$i][$j]->llamada == "SALIENTE") {
+                        if (($lista[$i][$j]->tiempo == $lista[$i][$a]->tiempo || $lista[$i][$j]->fecha == $lista[$i][$a]->fecha) && $lista[$i][$j]->llamada == "S") {
                          
-                            if ($lista[$i][$j]->radio_baseB == '-') {
-                                $lista[$i][$j]->radio_baseB = $lista[$i][$a]->radio_baseB;
-                                $lista[$i][$j]->coordenadaB = $lista[$i][$a]->coordenadaB;
+                            if ($lista[$i][$j]->sitioB == ' ') {
+                                $lista[$i][$j]->sitioB = $lista[$i][$a]->sitioB;
+                                $lista[$i][$j]->latitud = $lista[$i][$a]->latitud;
+                                $lista[$i][$j]->longitud = $lista[$i][$j]->longitud;
                             } else {
-                                $lista[$i][$j]->radio_baseA = $lista[$i][$a]->radio_baseA;
-                                $lista[$i][$j]->coordenadaA = $lista[$i][$a]->coordenadaA;
+                                $lista[$i][$j]->latitud = $lista[$i][$a]->latitud;
+                                $lista[$i][$j]->longitud = $lista[$i][$j]->longitud;
                             }
                               
                             //unset($lista[$i][$a]); 
@@ -588,6 +590,7 @@ class TigoController extends Controller
                                 
                         }
                         
+                        dd($lista);
                     }
                     
                 }

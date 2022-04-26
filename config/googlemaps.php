@@ -11,7 +11,7 @@ return [
     /* =====================================================================
     General
     ===================================================================== */
-    'key' => env('GOOGLE_MAPS_API_KEY', 'AIzaSyCG0Mwpu_yN933__wTpo1-PusUGLlKokow'), //Get API key: https://code.google.com/apis/console
+    'key' => env('GOOGLE_MAPS_API_KEY', 'AIzaSyCvDL0bYfJ9gcqV4aN7Gu3rK5DTWL_-Ukk'), //Get API key: https://code.google.com/apis/console
     'adsense_publisher_id' => env('GOOGLE_ADSENSE_PUBLISHER_ID', ''), //Google AdSense publisher ID
 
     'geocode' => [
