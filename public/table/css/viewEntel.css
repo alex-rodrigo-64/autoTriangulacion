@@ -44,3 +44,13 @@ padding: 8px;
 line-height: 1.42857143;
 vertical-align: top;
 }
+
+.table-body-cell4{
+  display: table-cell;
+  background: linear-gradient(100deg, #6fb35b, rgb(209, 240, 35));
+  border: 1px solid #dddddd;
+  padding: 8px;
+  line-height: 1.42857143;
+  vertical-align: top;
+  }
+  

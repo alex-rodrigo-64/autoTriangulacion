@@ -131,7 +131,7 @@ class EntelController extends Controller
                     ->first();
                     
                     $datos = [
-                        "nombre" => $nombres,
+                        "nombre" => $nombres->nombre,
                         "identificador" => $registro->identificador,
                     ];
                     
@@ -147,7 +147,6 @@ class EntelController extends Controller
 
         }     
         
-        //dd($lista);
         return view('entel.registro', compact('lista'));
     }
 
@@ -310,7 +309,10 @@ class EntelController extends Controller
     
             $nuevo = [];
             foreach ($fecha as $fecha) {
-                array_push($nuevo, $fecha);
+                if ($fecha != false) {
+                   array_push($nuevo, $fecha);
+                }
+                
             }
             
             return view('entel.informe',compact('nuevo','registro','filtrado'));
@@ -353,36 +355,27 @@ class EntelController extends Controller
                                     ->where('fecha', '>=' ,$fecha_inicial)
                                     ->where('fecha', '<=' ,$fecha_fin)
                                     ->where('tiempo', '<>' ,'-')
-                                    ->where('numeroA', '=' ,$filtrado)
+                                    ->where(function($q)use ($filtrado) {
+                                        $q->where('numeroA', '=' , $filtrado)
+                                          ->orWhere('numeroB', '=' ,$filtrado);
+                                    })
                                     ->get();
-
-                            $consultaB = DB::table('excels')
-                                    ->select('*')
-                                    ->where('identificador','=',$registro)
-                                    ->where('fecha', '>=' ,$fecha_inicial)
-                                    ->where('fecha', '<=' ,$fecha_fin)
-                                    ->where('tiempo', '<>' ,'-')
-                                    ->where('numeroB', '=' ,$filtrado)
-                                    ->get();
-                            
-                                foreach ($consultaB as $aux1) {
-                                    array_push($temp, $aux1);
-                                }
+                                    
                                 foreach ($consultaA as $aux1) {
                                     array_push($temp, $aux1);
-                                }
-                            
-
-                            
+                                }   
+                                
+                           
                             
                             array_push($lista, $temp);
+                             
                         }
                         
                     }
 
                 }
             }
-            
+
             $nuevo = [];
             $cant = 0;
 
@@ -425,7 +418,8 @@ class EntelController extends Controller
                         }
                         
                     }
-                    
+
+                   
                 }
                 $cant = $cant+1;
                 
@@ -434,10 +428,11 @@ class EntelController extends Controller
                 }else{
                     array_push($nuevo, $temp);
                 }
-               
-                
-                
             }
+
+            $new = [];
+
+            array_multisort(array_column($nuevo[0], 'fecha'), SORT_ASC, $nuevo[0]);
             
            
 
@@ -1126,7 +1121,7 @@ class EntelController extends Controller
         
         //imprimir mapa
 
-       set_time_limit(500); 
+       set_time_limit(4000); 
        
        $contador = 0;
        for ($i=0; $i < count($coordenadas); $i++) { 
@@ -1380,7 +1375,7 @@ class EntelController extends Controller
 
         //imprimir mapa
 
-       set_time_limit(500); 
+       set_time_limit(1000); 
        
        $contador = 0;
        for ($i=0; $i < count($coordenadas); $i++) { 
