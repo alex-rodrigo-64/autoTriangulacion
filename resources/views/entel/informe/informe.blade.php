@@ -1,8 +1,10 @@
 <div>
     <h5 class="text-align-center text-center">INFORME DE NUMEROS TELEFONICOS INVOLUCRADOS</h5>
-    <br><h1>naushfjhahf</h1>
+    
         @for ($i = 0; $i < $cant; $i++)
-        
+        <h6>Del número 74927921 utilizado por WILLIAN AGUILAR RODRIGUEZ,
+             y registrado con el nombre de: FELICIANO AGUILAR DURANO (padre del acusado) se analiza en el documento de registro de tráfico de llamadas,
+              proporcionada por la operadora Entel Bolivia. </h6>
             @for ($j = 0; $j < count($nuevo[$i]) ; $j++)
                     <?php $a = substr($nuevo[$i][$j]->fecha, 0, -9);
                         $b = substr($nuevo[$i][$j]->fecha, 10);
