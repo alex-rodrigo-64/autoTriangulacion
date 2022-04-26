@@ -32,18 +32,25 @@
                             @else
                             
                                   @if ($Matriz[$i][$j] != 0)
-                                  <div class="table-body-cell3">
-                                    <div class="text-white text-center">
-                                          {{ $Matriz[$i][$j]}}
-                                    </div>
-                                   
-                                  </div>
+                                    @if ($Matriz[0][$j] == $Matriz[$i][0])
+                                      <div class="table-body-cell4">
+                                        <div class="text-dark text-center">
+                                              {{ $Matriz[$i][$j]}}
+                                        </div> 
+                                      </div> 
+                                    @else
+                                      <div class="table-body-cell3">
+                                        <div class="text-white text-center">
+                                              {{ $Matriz[$i][$j]}}
+                                        </div> 
+                                      </div> 
+                                    @endif
+                                    
                                   @else
                                   <div class="table-body-cell">
                                   </div>  
                                   @endif
                                   
-                                
                             @endif
                            
                           
