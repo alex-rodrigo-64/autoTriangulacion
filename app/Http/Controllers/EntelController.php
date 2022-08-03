@@ -321,6 +321,7 @@ class EntelController extends Controller
 
     public function informeFecha(entel $viva, $registro, $filtrado ,$fecha)
     {
+        
        
         $fecha_inicial = $fecha . ' 00:00:00';
         $fecha_fin= $fecha . ' 23:59:59';
@@ -349,6 +350,7 @@ class EntelController extends Controller
                     if ($Matriz[$i][$j] == 1) {
                       
                         if ($Matriz[0][$j] == $registro && $Matriz[$i][0] == $filtrado) {
+
                             $consultaA = DB::table('excels')
                                     ->select('*')
                                     ->where('identificador','=',$registro)
@@ -360,13 +362,12 @@ class EntelController extends Controller
                                           ->orWhere('numeroB', '=' ,$filtrado);
                                     })
                                     ->get();
+
                                     
                                 foreach ($consultaA as $aux1) {
                                     array_push($temp, $aux1);
                                 }   
                                 
-                           
-                            
                             array_push($lista, $temp);
                              
                         }
@@ -375,7 +376,6 @@ class EntelController extends Controller
 
                 }
             }
-
             $nuevo = [];
             $cant = 0;
 
@@ -428,13 +428,12 @@ class EntelController extends Controller
                 }else{
                     array_push($nuevo, $temp);
                 }
+                
             }
 
-            $new = [];
 
             array_multisort(array_column($nuevo[0], 'fecha'), SORT_ASC, $nuevo[0]);
             
-           
 
         return view('entel.fecha', compact('nuevo','cant','registro','filtrado'));
     }
@@ -1121,7 +1120,7 @@ class EntelController extends Controller
         
         //imprimir mapa
 
-       set_time_limit(500); 
+       set_time_limit(5000); 
        
        $contador = 0;
        for ($i=0; $i < count($coordenadas); $i++) { 

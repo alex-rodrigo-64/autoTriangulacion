@@ -1,6 +1,6 @@
 <div>
     <h5 class="text-align-center text-center">INFORME DE NUMEROS TELEFONICOS INVOLUCRADOS</h5>
-    <br><h1>naushfjhahf</h1>
+    
         @for ($i = 0; $i < $cant; $i++)
         
             @for ($j = 0; $j < count($nuevo[$i]) ; $j++)

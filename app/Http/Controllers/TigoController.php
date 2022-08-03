@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\excelModel;
 use App\tigo;
 use App\tigoExcel;
+use FarhanWazir\GoogleMaps\GMaps;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel as Exx;
@@ -410,7 +411,7 @@ class TigoController extends Controller
                     $datos = [
                         'nombre' => "vacio",
                         'identificador' => $registros,
-                    ];
+                     ];
     
                 }
                 array_push($lista, $datos);
@@ -470,7 +471,7 @@ class TigoController extends Controller
             $fecha = [];
 
             foreach ($lista as $fechas) {
-                array_push($fecha, substr($fechas, 0, -6));
+                array_push($fecha, substr($fechas, 0, -9));
             }
             $fecha = array_unique($fecha);
     
@@ -479,7 +480,6 @@ class TigoController extends Controller
                 array_push($nuevo, str_replace("/", "-", $fecha));
             }
             
-        
             return view('tigo.informe',compact('nuevo','registro','filtrado'));
 
     }
@@ -488,8 +488,8 @@ class TigoController extends Controller
     public function fechaFiltrada($registro, $filtrado ,$fecha)
     {
        
-        $fecha_inicial = $fecha . ' 00:00:00';
-        $fecha_fin= $fecha . ' 23:59:59';
+        $fecha_inicial = str_replace("-", "/", $fecha) . ' 00:00:00';
+        $fecha_fin= str_replace("-", "/", $fecha) . ' 23:59:59';
 
             $vertical = DB::table('tigos')             //contar arreglo con count($vertical)
                             ->select('numero_usuario')
@@ -502,7 +502,6 @@ class TigoController extends Controller
 
             $Matriz = new tigoExcel();
             $Matriz = $Matriz->matriz();
-
             $lista = [];
             
 
@@ -515,101 +514,120 @@ class TigoController extends Controller
                     if ($Matriz[$i][$j] == 1) {
                       
                         if ($Matriz[0][$j] == $registro && $Matriz[$i][0] == $filtrado) {
-                            $consultaA = DB::table('excels')
+                            $consultaA = DB::table('tigo_excels')
                                     ->select('*')
                                     ->where('identificador','=',$registro)
                                     ->where('fecha', '>=' ,$fecha_inicial)
                                     ->where('fecha', '<=' ,$fecha_fin)
                                     ->where('tiempo', '<>' ,'-')
-                                    ->where('numeroA', '=' ,$filtrado)
+                                    ->where(function($q)use ($filtrado) {
+                                        $q->where('numeroA', '=' , $filtrado)
+                                          ->orWhere('numeroB', '=' ,$filtrado);
+                                    })
                                     ->get();
 
-                            $consultaB = DB::table('excels')
-                                    ->select('*')
-                                    ->where('identificador','=',$registro)
-                                    ->where('fecha', '>=' ,$fecha_inicial)
-                                    ->where('fecha', '<=' ,$fecha_fin)
-                                    ->where('tiempo', '<>' ,'-')
-                                    ->where('numeroB', '=' ,$filtrado)
-                                    ->get();
+                                    foreach ($consultaA as $aux1) {
+                                        array_unshift($temp, $aux1);
+                                    }   
+                                    
+                                array_push($lista, $temp);
                             
-                                foreach ($consultaB as $aux1) {
-                                    array_push($temp, $aux1);
-                                }
-                                foreach ($consultaA as $aux1) {
-                                    array_push($temp, $aux1);
-                                }
-                            
-
-                            
-                            
-                            array_push($lista, $temp);
                         }
                         
                     }
 
                 }
             }
-            
-            $nuevo = [];
-            $cant = 0;
 
-            for ($i=0; $i < count($lista); $i++) { 
-                $temp = [];
-                for ($j=0; $j <  count($lista[$i])-1; $j++) { 
-                    $a = $j+1;
-                    if (($lista[$i][$j]->tiempo == $lista[$i][$a]->tiempo || $lista[$i][$j]->fecha == $lista[$i][$a]->fecha) && $lista[$i][$j]->llamada == "ENTRANTE") {
-                        
-                        if ($lista[$i][$j]->radio_baseB == '-' ) {
-                            $lista[$i][$j]->radio_baseB = $lista[$i][$a]->radio_baseB;
-                            $lista[$i][$j]->coordenadaB = $lista[$i][$a]->coordenadaB;
-                        } else {
-                            $lista[$i][$j]->radio_baseA = $lista[$i][$a]->radio_baseA;
-                            $lista[$i][$j]->coordenadaA = $lista[$i][$a]->coordenadaA;
-                        }
-                        
-                        //unset($lista[$i][$a]); 
-                        array_push($temp, $lista[$i][$j]);
-                        
-                         $j = $j+1;
+            
+
+        return view('tigo.fecha', compact('lista','registro','filtrado'));
+    }
+
+    public function gps(tigo $entel, $registro, $filtrado, $fecha, $coordenada,$id)
+    {   
+        $a = substr($id, 0, -9);
+        $hora = substr($id, 1);
+
+        $aux = str_replace("-", "/", $fecha) . $hora;
+ 
+            $nombre = DB::table('tigo_excels')
+                    ->select('sitio','punto_cardinal')
+                    ->where('identificador','=', $registro)
+                    ->where('fecha','=', $aux)
+                    ->where('sitio','<>', ' ')
+                    ->first();
+
+        $nombreSitio = $nombre->sitio;
+        $loc = $nombre->punto_cardinal;
+
+        $gmapconfig['center'] = $coordenada;
+        $gmapconfig['zoom'] = '14';
+        $gmapconfig['map_height'] = '500px';
+        $gmapconfig['map_type'] = 'SATELLITE';
+
+        $gmapconfig['scrollwheel'] = false;
+        //$gmapconfig['disableDefaultUI'] = true;
+        
+
+        //GMaps::initialize($config);
+        $livegooglemap = new GMaps();
+        $livegooglemap->initialize($gmapconfig);
+
+        
+        $marker['position'] = $coordenada;
+
+        $circle['center'] = $coordenada;
+        $circle['radius'] = '2000';
+        $circle['strokeColor'] = 'rgb(163, 228, 215)';
+        $circle['fillColor'] = true;
+
+        //$marker['icon'] = 'https://chart.googleapis.com/chart?chst=d_map_xpin_icon&chld=pin';
+
+        //https://chart.googleapis.com/chart?chst=d_bubble_icon_text_small&chld=ski|bb|Wheeee!|FFFFFF|000000
+
+        $livegooglemap->add_marker($marker);
+        $livegooglemap->add_circle($circle);
+        $map = $livegooglemap->create_map();
+   
+        //dd($var);
+        if ($loc == 'S') {
+            $loc = 'SUD';
+        }else{
+            if ($loc == 'N') {
+                $loc = 'NORTE';
+            }else{
+                if ($loc == 'O') {
+                    $loc = 'OESTE';
+                } else {
+                    if ($loc == 'E') {
+                        $loc = 'ESTE';
                     } else {
-                        if (($lista[$i][$j]->tiempo == $lista[$i][$a]->tiempo || $lista[$i][$j]->fecha == $lista[$i][$a]->fecha) && $lista[$i][$j]->llamada == "SALIENTE") {
-                         
-                            if ($lista[$i][$j]->radio_baseB == '-') {
-                                $lista[$i][$j]->radio_baseB = $lista[$i][$a]->radio_baseB;
-                                $lista[$i][$j]->coordenadaB = $lista[$i][$a]->coordenadaB;
-                            } else {
-                                $lista[$i][$j]->radio_baseA = $lista[$i][$a]->radio_baseA;
-                                $lista[$i][$j]->coordenadaA = $lista[$i][$a]->coordenadaA;
-                            }
-                              
-                            //unset($lista[$i][$a]); 
-                            array_push($temp, $lista[$i][$j]);
-                            $j = $j+1;
-                             
+                        if ($loc == 'NO') {
+                            $loc = 'NOROESTE';
                         } else {
-                                array_push($temp, $lista[$i][$j]);
-                                
+                            if ($loc == 'NE') {
+                                $loc = 'NORESTE';
+                            } else {
+                                if ($loc == 'SO') {
+                                    $loc = 'SUDOESTE';
+                                } else {
+                                    if ($loc == 'SE') {
+                                        $loc = 'SUDESTE';
+                                    } else {
+                                        $loc = 'Desconocido';
+                                    }
+                                }
+                            }
                         }
                         
                     }
                     
                 }
-                $cant = $cant+1;
-                
-                if (sizeof($lista[$i])== 1) {
-                    array_push($nuevo, $lista[$i]);
-                }else{
-                    array_push($nuevo, $temp);
-                }
-               
-                
                 
             }
-            
-           
-
-        return view('tigo.fecha', compact('nuevo','cant','registro','filtrado'));
+        }
+        return view('tigo.location',compact('map','registro','filtrado','fecha','nombreSitio','loc'));
     }
 
 
