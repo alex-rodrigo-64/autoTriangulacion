@@ -312,6 +312,7 @@ class TigoController extends Controller
     }
 
     public function informeRegistro(){
+
         $registro = DB::table('tigo_excels')             
                         ->select('identificador')
                         ->distinct()
@@ -325,15 +326,13 @@ class TigoController extends Controller
                     ->select('nombre')
                     ->where('numero_usuario','=',$registro->identificador)
                     ->exists(); 
-                    
             if ($nombre) {
                 $nombres = DB::table('tigos')             
                     ->select('nombre')
                     ->where('numero_usuario','=',$registro->identificador)
                     ->first();
-                    
                     $datos = [
-                        "nombre" => $nombres,
+                        "nombre" => $nombres->nombre,
                         "identificador" => $registro->identificador,
                     ];
                     
