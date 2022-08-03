@@ -67,7 +67,6 @@
                       </div>
 
                       <a href="{{ url('tigo/register/XLSX/view') }}"  class="btn btn-sm btn-danger float-left" >Atras</a>
-                      <a href="{{ url('tigo/informe/GPS') }}" class="btn btn-sm btn-success float-right">Siguiente</a>
                     </div>
                 
                   </div>
