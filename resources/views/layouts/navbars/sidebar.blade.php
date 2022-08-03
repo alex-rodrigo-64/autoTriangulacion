@@ -7,7 +7,7 @@
         </div>
         <ul class="nav">
             @if (Auth::user()->administracion == '2')
-            <li @if ($pageSlug == 'dashboard') class="active " @endif>
+            <li >
                 <a href="{{ route('home') }}">
                     <i class="tim-icons icon-chart-pie-36"></i>
                     <p>{{ __('Dashboard') }}</p>
@@ -47,7 +47,7 @@
             </li> 
             @endif
             @if (Auth::user()->administracion == '2')
-             <li @if ($pageSlug == 'icons') class="active " @endif>
+             <li >
                 <a href="{{ url('example/entel') }}">
                     <i class="tim-icons icon-atom"></i>
                     <p>{{ __('Ejemplo PDF to Excel') }}</p>

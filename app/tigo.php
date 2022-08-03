@@ -12,13 +12,13 @@ class tigo implements ToModel
             'llamada' => $row[0],
             'numeroA' => $row[1],
             'numeroB' => $row[2],
-            'fecha' => $row[4],
-            'tiempo' => $row[5],
-            'ciudad' => $row[7],
-            'sitio' => $row[8],
-            'longitud' => $row[10],
-            'latitud' => $row[11],
-            'punto_cardinal' =>$row[12],
+            'fecha' => $row[3],
+            'tiempo' => $row[4],
+            'ciudad' => $row[6],
+            'sitio' => $row[7],
+            'longitud' => $row[9],
+            'latitud' => $row[10],
+            'punto_cardinal' =>$row[11],
             
         ]);
     }
