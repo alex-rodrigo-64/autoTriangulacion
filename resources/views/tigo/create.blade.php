@@ -5,7 +5,7 @@
 <style>
     table {
         padding: 130px; 
-    }button{
+    button{
         width: 150px;
         margin-left: auto;
         margin-right: auto;
