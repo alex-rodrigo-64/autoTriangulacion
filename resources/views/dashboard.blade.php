@@ -34,6 +34,7 @@
             <img src="{{ asset('images/carrierLogo/tigo.jpg') }}" width="300" height="250"
                 class="rounded mx-auto d-block" alt="Responsive image">
         </button>
+        <a type="button" class="btn btn-default" href="/tigo/register/XLSX/view">Ver Proyecto</a>
     </div>
     <div class="col-lg-4">
         <button type="button" class="btn btn-default">
@@ -42,6 +43,7 @@
             <img src="{{ asset('images/carrierLogo/entel.jpg') }}" width="300" height="250"
                 class="rounded mx-auto d-block" alt="Responsive image">
         </button>
+        <a type="button" class="btn btn-default" href="/entel/register/XLSX/view">Ver Proyecto</a>
     </div>
 
 </div>

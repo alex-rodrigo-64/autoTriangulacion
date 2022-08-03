@@ -9,7 +9,7 @@
           <div class="card-header">
             <h4 class="card-title text-center">Tabla de Relacion</h4>
           </div>
-          <div class="card-body">
+          <div class="card-body table-responsive">
             
             <div class="row justify-content-center">
               <div class="col-md-10">
