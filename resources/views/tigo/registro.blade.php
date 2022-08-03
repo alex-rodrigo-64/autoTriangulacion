@@ -14,7 +14,7 @@
   </style>
 
 <div class="row justify-content-center">
-    <div class="col-md-10"> <a href="/entel/informe/registros/pdf/" class="btn btn-sm btn-warning float-right" >PDF</a>
+    {{--<div  class="col-md-10"> <a href="/entel/informe/registros/pdf/" class="btn btn-sm btn-warning float-right" >PDF</a>--}}
         <div class="card">
           <div class="card-header">
             <h4 class="card-title text-center"><b>REGISTRO DE FLUJO DE LLAMADAS</b></h4>
@@ -67,7 +67,6 @@
                       </div>
 
                       <a href="{{ url('tigo/register/XLSX/view') }}"  class="btn btn-sm btn-danger float-left" >Atras</a>
-                      <a href="{{ url('tigo/informe/GPS') }}" class="btn btn-sm btn-success float-right">Siguiente</a>
                     </div>
                 
                   </div>

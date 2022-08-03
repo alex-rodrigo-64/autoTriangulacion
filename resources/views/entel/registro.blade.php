@@ -67,7 +67,7 @@
                       </div>
 
                       <a href="{{ url('entel/register/XLSX/view') }}"  class="btn btn-sm btn-danger float-left" >Atras</a>
-                      <a href="{{ url('entel/informe/GPS') }}" class="btn btn-sm btn-success float-right">Siguiente</a>
+                      
                     </div>
                 
                   </div>
