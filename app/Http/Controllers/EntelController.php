@@ -1121,7 +1121,7 @@ class EntelController extends Controller
         
         //imprimir mapa
 
-       set_time_limit(4000); 
+       set_time_limit(10000); 
        
        $contador = 0;
        for ($i=0; $i < count($coordenadas); $i++) { 
@@ -1375,7 +1375,7 @@ class EntelController extends Controller
 
         //imprimir mapa
 
-       set_time_limit(1000); 
+       set_time_limit(10000); 
        
        $contador = 0;
        for ($i=0; $i < count($coordenadas); $i++) { 
