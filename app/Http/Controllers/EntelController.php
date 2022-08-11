@@ -377,7 +377,7 @@ class EntelController extends Controller
             }
             $nuevo = [];
             $cant = 0;
-
+            
             for ($i=0; $i < count($lista); $i++) { 
                 $temp = [];
                 for ($j=0; $j <  count($lista[$i])-1; $j++) { 
@@ -386,7 +386,8 @@ class EntelController extends Controller
                     $segundos1 = intval(substr($lista[$i][$j]->fecha,17));
                     $segundos2 = intval(substr($lista[$i][$a]->fecha,17));
 
-                    if (( intval(substr($lista[$i][$j]->fecha,17))  == $segundos1 || intval(substr($lista[$i][$j]->fecha,17)) == $segundos2) && $lista[$i][$j]->llamada == "ENTRANTE") {
+                     
+                    if (( substr($lista[$i][$j]->fecha,0,-2) == substr($lista[$i][$a]->fecha,0,-2) && ($segundos1 == $segundos2 || $segundos1 < $segundos2 ))&& $lista[$i][$j]->llamada == "ENTRANTE") {
                         if ($lista[$i][$j]->radio_baseB == '-' ) {
                             $lista[$i][$j]->radio_baseB = $lista[$i][$a]->radio_baseB;
                             $lista[$i][$j]->coordenadaB = $lista[$i][$a]->coordenadaB;
@@ -402,7 +403,7 @@ class EntelController extends Controller
 
                          
                     } else {
-                        if ((intval(substr($lista[$i][$j]->fecha,17))  == $segundos1 || intval(substr($lista[$i][$j]->fecha,17)) == $segundos2) && $lista[$i][$j]->llamada == "SALIENTE") {
+                        if (( substr($lista[$i][$j]->fecha,0,-2) == substr($lista[$i][$a]->fecha,0,-2) && ($segundos1 == $segundos2 || $segundos1 < $segundos2 )) && $lista[$i][$j]->llamada == "SALIENTE") {
                          
                             if ($lista[$i][$j]->radio_baseB == '-') {
                                 $lista[$i][$j]->radio_baseB = $lista[$i][$a]->radio_baseB;
@@ -434,7 +435,7 @@ class EntelController extends Controller
                 }
                 
             }
-
+            
 
             array_multisort(array_column($nuevo[0], 'fecha'), SORT_ASC, $nuevo[0]);
             
