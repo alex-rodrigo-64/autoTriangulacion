@@ -375,7 +375,6 @@ class EntelController extends Controller
 
                 }
             }
-
             $nuevo = [];
             $cant = 0;
 
@@ -384,14 +383,10 @@ class EntelController extends Controller
                 for ($j=0; $j <  count($lista[$i])-1; $j++) { 
                     $a = $j+1;
 
-                    $temp1 = substr($lista[$i][$j]->fecha,0,-2);
-                    $temp2 = substr($lista[$i][$a]->fecha,0,-2);
                     $segundos1 = intval(substr($lista[$i][$j]->fecha,17));
                     $segundos2 = intval(substr($lista[$i][$a]->fecha,17));
 
-                    if (( $segundos1  == $segundos2
-                    || $segundos1 == $segundos2+1) 
-                    && $lista[$i][$j]->llamada == "ENTRANTE") {
+                    if (( intval(substr($lista[$i][$j]->fecha,17))  == $segundos1 || intval(substr($lista[$i][$j]->fecha,17)) == $segundos2) && $lista[$i][$j]->llamada == "ENTRANTE") {
                         if ($lista[$i][$j]->radio_baseB == '-' ) {
                             $lista[$i][$j]->radio_baseB = $lista[$i][$a]->radio_baseB;
                             $lista[$i][$j]->coordenadaB = $lista[$i][$a]->coordenadaB;
@@ -407,9 +402,7 @@ class EntelController extends Controller
 
                          
                     } else {
-                        if (($segundos1  == $segundos2
-                        || $segundos1 == $segundos2+1) 
-                        && $lista[$i][$j]->llamada == "SALIENTE") {
+                        if ((intval(substr($lista[$i][$j]->fecha,17))  == $segundos1 || intval(substr($lista[$i][$j]->fecha,17)) == $segundos2) && $lista[$i][$j]->llamada == "SALIENTE") {
                          
                             if ($lista[$i][$j]->radio_baseB == '-') {
                                 $lista[$i][$j]->radio_baseB = $lista[$i][$a]->radio_baseB;
