@@ -426,7 +426,6 @@ class TigoController extends Controller
 
     public function informeFiltrado(tigo $viva, $registro, $filtrado)
     {
-        
         $vertical = DB::table('tigos')             //contar arreglo con count($vertical)
                         ->select('numero_usuario')
                         ->get();
@@ -486,7 +485,6 @@ class TigoController extends Controller
    
     public function fechaFiltrada($registro, $filtrado ,$fecha)
     {
-       
         $fecha_inicial = str_replace("-", "/", $fecha) . ' 00:00:00';
         $fecha_fin= str_replace("-", "/", $fecha) . ' 23:59:59';
 
@@ -537,7 +535,6 @@ class TigoController extends Controller
 
                 }
             }
-
             
 
         return view('tigo.fecha', compact('lista','registro','filtrado'));

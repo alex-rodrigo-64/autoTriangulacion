@@ -76,7 +76,7 @@
                                       $minuto = $minuto+1;
                                   } else {
                                     if ($minuto == 59) {
-                                        $minuto = 0;
+                                        $minuto = 0;      
                                         $hora = $hora+1;
                                     } else {
                                       $tiempoActual = $tiempoActual -60;
@@ -103,19 +103,11 @@
                             ?>
                         @if ($lista[$i][$j]->tiempo != "0")
                         <ul style= "list-style-type: square;"><li>
-<<<<<<< HEAD
-                            <h4 align = "justify">EN FECHA {{$a}} a horas {{$b}} el usuario del número {{$nuevo[$i][$j]->numeroA}} @if ($nombreA != 'vacio')registrado a nombre de {{$nombreA}}, @else con datos de usuario desconocido @endif 
-                                <b>toma</b> contacto por {{$nuevo[$i][$j]->tiempo}} minutos, @if ($nuevo[$i][$j]->sitio != '-')
-                                    empleando la radio base <a href="/tigo/informe/registro/{{$registro}}/{{$filtrado}}/{{$a}}/{{$nuevo[$i][$j]->coordenadaA}}/{{1 .$b}}">{{$nuevo[$i][$j]->radio_baseA}}</a>, @else empleando una radio base DESCONOCIDA, @endif con el número {{$nuevo[$i][$j]->numeroB}} 
-                                @if ($nombreB != 'vacio')registrado a nombre de {{$nombreB}}, @else con datos de usuario desconocido @endif , @if ($nuevo[$i][$j]->radio_baseB == '-')
-                                para este último empleó una radio base DESCONOCIDA.@else para este último empleó una radio base <a href="/tigo/informe/registro/{{$registro}}/{{$filtrado}}/{{$a}}/{{$nuevo[$i][$j]->coordenadaB}}/{{2 .$b}}">{{$nuevo[$i][$j]->radio_baseB}}</a>.@endif 
-=======
                             <h4 align = "justify">EN FECHA {{$a}} a horas {{$b}} el usuario del número {{$lista[$i][$j]->numeroA}} @if ($nombreA != 'vacio')registrado a nombre de {{$nombreA}}, @else con datos de usuario desconocido @endif 
                                 <b>toma</b> contacto por {{$texto}} minutos, @if ($lista[$i][$j]->sitio != null)
                                     empleando la radio base <a href="/tigo/informe/registro/{{$registro}}/{{$filtrado}}/{{$a}}/{{ $coordenada}}/{{1 .$b}}">{{$lista[$i][$j]->sitio}}</a>, @else empleando una radio base DESCONOCIDA, @endif con el número {{$lista[$i][$j]->numeroB}} 
                                 @if ($nombreB != 'vacio')registrado a nombre de {{$nombreB}}, @else con datos de usuario desconocido @endif , 
                                 para este último empleó una radio base DESCONOCIDA. 
->>>>>>> e905fc5c4da306b52ee5de0bc56b0208c9e22656
                             </h4></li></ul>
                         @else
                         <ul style= "list-style-type: square;"><li>
