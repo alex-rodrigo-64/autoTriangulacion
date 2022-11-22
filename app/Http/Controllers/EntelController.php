@@ -438,7 +438,6 @@ class EntelController extends Controller
             
 
             array_multisort(array_column($nuevo[0], 'fecha'), SORT_ASC, $nuevo[0]);
-            
 
         return view('entel.fecha', compact('nuevo','cant','registro','filtrado'));
     }
@@ -853,6 +852,9 @@ class EntelController extends Controller
                     ->where('radio_baseA','<>', '-')
                     ->first();
             $nombre = $nombre->radio_baseA;
+            if ($nombre == null) {
+                $nomber = "DESCONOCIDO";
+            } 
         }else {
             $nombre = DB::table('excels')
                     ->select('radio_baseB')
@@ -860,7 +862,13 @@ class EntelController extends Controller
                     ->where('fecha','=', $aux)
                     ->where('radio_baseB','<>', '-')
                     ->first();
-            $nombre = $nombre->radio_baseB;
+             if ($nombre == null) {
+                $nomber = "DESCONOCIDO";
+            }else{
+                    $nombre = $nombre->radio_baseB;
+            }   
+
+           
         }
         
         
