@@ -67,6 +67,7 @@ Route::group(['middleware' => 'auth'], function () {
 	//GPS
 	Route::get('entel/informe/registro/{registro}/{filtrado}/{fecha}/{coordenada}/{id}',['as' => 'entel.gps','uses' => 'EntelController@gps']);
 	Route::post('entel/informe/GPS',['as' => 'entel.localizacion','uses' => 'EntelController@localizacion']);
+	Route::get('entel/borrar',['as' => 'entel.borrar','uses' => 'EntelController@borrar']);
 	
 	
 });
@@ -83,6 +84,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('tigo/informe/registro/{registro}/{filtrado}', ['as' => 'tigo.informefiltrado', 'uses' => 'TigoController@informefiltrado']);
 	Route::get('tigo/informe/registro/{registro}/{filtrado}/{fecha}', ['as' => 'tigo.fechaFiltrada', 'uses' => 'TigoController@fechaFiltrada']);
 	Route::get('tigo/informe/registro/{registro}/{filtrado}/{fecha}/{coordenada}/{id}',['as' => 'tigo.gps','uses' => 'TigoController@gps']);
+	Route::get('tigo/borrar',['as' => 'tigo.borrar','uses' => 'TigoController@borrar']);
 });
 
 

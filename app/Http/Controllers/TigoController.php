@@ -627,5 +627,13 @@ class TigoController extends Controller
         return view('tigo.location',compact('map','registro','filtrado','fecha','nombreSitio','loc'));
     }
 
+    public function borrar(){
+
+        DB::table('tigos')->delete();
+        DB::table('tigo_excels')->delete();
+
+        return redirect('/home');
+    }
+
 
 }

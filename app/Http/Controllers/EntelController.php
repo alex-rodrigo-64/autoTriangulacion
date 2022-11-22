@@ -1373,4 +1373,12 @@ class EntelController extends Controller
         return $pdf->setPaper('a4', 'landscape')
                    ->stream('entel.pdf');
    }
+
+   public function borrar(){
+
+    DB::table('entels')->delete();
+    DB::table('excels')->delete();
+
+    return redirect('/home');
+}
 }
